@@ -81,7 +81,7 @@ function main() {
 
   // Draw connect-the-dots for 6 vertices (never 'vertexes'!!).
   // see http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDrawArrays.xml
- gl.drawArrays(gl.LINE_LOOP, 0, n); // gl.drawArrays(mode, first, count)
+ gl.drawArrays(gl.LINE_STRIP, 0, n); // gl.drawArrays(mode, first, count)
 			//mode: sets drawing primitive to use. 
 						// WebGL offers these choices: 
 						// gl.POINTS
@@ -104,16 +104,28 @@ function initVertexBuffers(gl) {
 //==============================================================================
 // first, create a JavaScript typed array with all our vertex attribute values:
   var vertices = new Float32Array([
-     0.0,  0.5, 0.0, 1.0,	// CAREFUL! I made these into 4D points/ vertices: x,y,z,w.
-    -0.2,  0.0, 0.0, 1.0,	// new point!  (? What happens if I make w=0 instead of 1.0?)
-    -0.5, -0.5, 0.0, 1.0, // new point! (note we need a trailing commas here)  
-     0.0, -0.2, 0.0, 1.0, 	
-     0.5, -0.5, 0.0, 1.0,	
-     0.2,  0.0, 0.0, 1.0,
-     0.1,  0.0, 0.0, 1.0,
-     
+    0.5, -0.5, -1.0, 2.0, // bottom
+    1.0, -1.0, 1.0, 2.0,
+    -1.0, -1.0, 1.0, 2.0,
+    -1.5, -0.5, -1.0, 2.0,
+    0.5, -0.5, -1.0, 2.0,
+
+    0.5, 1.5, -1.0, 2.0, // right
+    1.0, 1.0, 1.0, 2.0,
+    1.0, -1.0, 1.0, 2.0,
+    1.0, 1.0, 1.0, 2.0,
+
+    -1.0, 1.0, 1.0, 2.0, //left
+    -1.0, -1.0, 1.0, 2.0,
+    -1.5, -0.5, -1.0, 2.0,
+    -1.5, 1.5, -1.0, 2.0,
+    -1.0, 1.0, 1.0, 2.0,
+    -1.5, 1.5, -1.0, 2.0,
+
+     0.5, 1.5, -1.0, 2.0,
+
   ]);
-  var n = 7; // The number of vertices
+  var n = 16; // The number of vertices
 
   // Then in the GPU, create a vertex buffer object (VBO) to hold vertex data:
   var VBOloc = gl.createBuffer();	// get it's 'handle'
